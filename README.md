@@ -1,2 +1,2 @@
-##Project for Galvanize JS Workshop
-#completed May 2016
+#Project for Galvanize JS Workshop
+##completed May 2016
