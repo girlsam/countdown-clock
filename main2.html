@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Countdown Picker</title>
+  <link rel="stylesheet" href="main.css">
+  <script src="http://momentjs.com/downloads/moment.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="pikaday.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/locale/af.js"></script>
+  <script type="text/javascript" src="main2.js"></script>
+
+</head>
+<body>
+  <h1>What date would you like to count down to?</h1>
+    <input type="text" id="datepicker" placeholder="Pick a Date">
+    <button type="submit" id="submitBtn" value="Submit">Calculate</button>
+    <div id="countdown"></div>
+    <script>
+    var dateInput; //assign variable to use in function
+    $('#submitBtn').click(function() { //on click of "Calculate" button
+      dateInput = $('#datepicker').val(); //set value of input to variable dateInput
+      var formatDate = moment(dateInput).lang('en').format("MMM DD, YYYY"); //reformat date to match value required in function (target_date)
+          var target_date = new Date(formatDate).getTime(); //set target_date to take datepicker value
+          var days, hours, minutes, seconds; //set variables
+          var countdown = document.getElementById("countdown"); //countdown id for innerHTML
+
+              setInterval(function () {
+                  var current_date = new Date().getTime(); //set today's date
+                  var seconds_left = (target_date - current_date) / 1000; //target_date is value in open text field
+                  days = parseInt( seconds_left / 86400 ); //math
+                  seconds_left = seconds_left % 86400; //math
+                  hours = parseInt( seconds_left / 3600 ); //more math
+                  seconds_left = seconds_left % 3600; //more math
+                  minutes = parseInt( seconds_left / 60 ); //nope
+                  seconds = parseInt( seconds_left % 60 ); //still math
+                  countdown.innerHTML = days + " <span class\=\"calendar\">days<\/span><br> " + hours + " <span class\=\"calendar\">hours<\/span><br> " + minutes + " <span class\=\"calendar\">minutes<\/span><br> " + seconds + " <span class\=\"calendar\">seconds<\/span>";
+              }, 1000); //display in body & run through object every second
+      });
+      var picker = new Pikaday({ field: document.getElementById('datepicker') }); //sets the calendar
+
+
+//console.log(day);
+
+</script>
+<div id="datepicker"><p></p></div>
+</body>
+</html>
